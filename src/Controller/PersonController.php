@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Person;
 use App\Form\Type\PersonType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -29,6 +28,7 @@ class PersonController extends AbstractController
 
     /**
      * @Route("/person/create", name="create-person")
+     *
      */
     public function create(Request $request)
     {
@@ -47,10 +47,17 @@ class PersonController extends AbstractController
         if($form->isSubmitted()) {
             $person = $form->getData();
 
+            $id = $person->getIdentifier();
+            if(strlen($id) < 11 || strlen($id) > 15) {
+                $this->addFlash('warning', 'Ops, we got an error!');
+                return $this->redirect('/person/create');
+            }
+
             $p = $this->getDoctrine()->getManager();
             $p->persist($person);
             $p->flush();
 
+            $this->addFlash('success', 'Person created!');
             return $this->redirect('/person');
         }
 
@@ -89,7 +96,11 @@ class PersonController extends AbstractController
             $person = $form->getData();
             $p->flush();
 
-            return $this->redirect('/person/');
+            $this->addFlash(
+                'notice',
+                'Your changes were saved!'
+            );
+            return $this->redirect('/person');
         }
 
         return $this->render('/person/edit.html.twig', [
