@@ -17,19 +17,24 @@ class Person
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=9)
+     * @ORM\Column(type="string", length=10)
      */
-    private $Type_person;
+    private $type_person;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $Identifier;
+    private $identifier;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="text")
      */
-    private $Name;
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $email;
 
     public function getId(): ?int
     {
@@ -38,36 +43,48 @@ class Person
 
     public function getTypePerson(): ?string
     {
-        return $this->Type_person;
+        return $this->type_person;
     }
 
-    public function setTypePerson(string $Type_person): self
+    public function setTypePerson(string $type_person): self
     {
-        $this->Type_person = $Type_person;
+        $this->type_person = $type_person;
 
         return $this;
     }
 
     public function getIdentifier(): ?int
     {
-        return $this->Identifier;
+        return $this->identifier;
     }
 
-    public function setIdentifier(int $Identifier): self
+    public function setIdentifier(int $identifier): self
     {
-        $this->Identifier = $Identifier;
+        $this->identifier = $identifier;
 
         return $this;
     }
 
     public function getName(): ?string
     {
-        return $this->Name;
+        return $this->name;
     }
 
-    public function setName(string $Name): self
+    public function setName(string $name): self
     {
-        $this->Name = $Name;
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }

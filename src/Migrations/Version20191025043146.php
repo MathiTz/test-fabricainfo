@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191025020558 extends AbstractMigration
+final class Version20191025043146 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,7 +22,7 @@ final class Version20191025020558 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'sqlite', 'Migration can only be executed safely on \'sqlite\'.');
 
-        $this->addSql('CREATE TABLE person (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, type_person VARCHAR(9) NOT NULL, identifier INTEGER NOT NULL, name VARCHAR(50) NOT NULL)');
+        $this->addSql('CREATE TABLE person (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, type_person VARCHAR(10) NOT NULL, identifier INTEGER NOT NULL, name CLOB NOT NULL, email VARCHAR(50) DEFAULT NULL)');
     }
 
     public function down(Schema $schema) : void

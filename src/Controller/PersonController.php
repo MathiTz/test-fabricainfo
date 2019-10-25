@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Person;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -30,14 +31,12 @@ class PersonController extends AbstractController
     public function create(Request $request)
     {
         $person = new Person();
-        $person->setTypePerson('Física');
-        $person->setIdentifier('06601625396');
-        $person->setName('Matheus Alves Peixoto dos Santos');
 
         $form = $this->createFormBuilder($person)
             ->add('typeperson', TextType::class)
             ->add('identifier', NumberType::class)
             ->add('name', TextType::class)
+            ->add('email', EmailType::class)
             ->add('save', SubmitType::class, ['label'=>'Create person'])
             ->getForm();
 
@@ -77,6 +76,7 @@ class PersonController extends AbstractController
             ->add('typeperson', TextType::class)
             ->add('identifier', NumberType::class)
             ->add('name', TextType::class)
+            ->add('email', EmailType::class)
             ->add('save', SubmitType::class, ['label'=>'Update person'])
             ->getForm();
 
@@ -100,7 +100,7 @@ class PersonController extends AbstractController
      */
     public function delete($id)
     {
-        $p = $this->getDoctrine()->getManager();
+    $p = $this->getDoctrine()->getManager();
         $person = $p->getRepository('App:Person')->find($id);
 
         if (!$person) {
