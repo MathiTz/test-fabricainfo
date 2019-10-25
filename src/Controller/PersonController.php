@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Person;
+use App\Form\Type\PersonType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -33,7 +35,7 @@ class PersonController extends AbstractController
         $person = new Person();
 
         $form = $this->createFormBuilder($person)
-            ->add('typeperson', TextType::class)
+            ->add('typeperson',PersonType::class)
             ->add('identifier', NumberType::class)
             ->add('name', TextType::class)
             ->add('email', EmailType::class)
@@ -73,7 +75,7 @@ class PersonController extends AbstractController
         }
 
         $form = $this->createFormBuilder($person)
-            ->add('typeperson', TextType::class)
+            ->add('typeperson',PersonType::class)
             ->add('identifier', NumberType::class)
             ->add('name', TextType::class)
             ->add('email', EmailType::class)
