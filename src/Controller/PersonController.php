@@ -36,8 +36,8 @@ class PersonController extends AbstractController
 
         $form = $this->createFormBuilder($person)
             ->add('typeperson',PersonType::class)
-            ->add('identifier', NumberType::class)
-            ->add('name', TextType::class)
+            ->add('identifier', NumberType::class, ['required'=>true])
+            ->add('name', TextType::class, ['required'=>true])
             ->add('email', EmailType::class)
             ->add('save', SubmitType::class, ['label'=>'Create person'])
             ->getForm();
